@@ -1,24 +1,32 @@
-const express=require("express");
+const express = require("express");
 const { connection } = require("./db");
 const { userRouter } = require("./Router/userRouter");
-const Port=8080
-const app=express();
-const cors=require("cors");
+const Port = 8080;
+const app = express();
+const cors = require("cors");
 const { taskRouter } = require("./Router/taskrouter");
-const { files } = require("./Router/uploadRouter");
-app.use(cors())
-app.use(express.json())
-app.use("/users",userRouter)
-app.use("/task",taskRouter);
-app.use("/upload",files)
+const { files } = require("./Router/uploadRouter")
 
-app.listen(Port,async()=>{
-try {
-  await connection
-  console.log("connected to the db");
-  console.log(`server running on port ${8080}`);
-} catch (error) {
-  console.log(error);
-}
+// Set up CORS middleware with specific origin
+const corsOptions = {
+  origin: "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
 
-})
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use("/users", userRouter);
+app.use("/task", taskRouter);
+app.use("/upload", files);
+
+app.listen(Port, async () => {
+  try {
+    await connection;
+    console.log("Connected to the database");
+    console.log(`Server running on port ${Port}`);
+  } catch (error) {
+    console.error(error);
+  }
+});
