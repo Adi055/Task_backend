@@ -5,11 +5,11 @@ const Port = 8080;
 const app = express();
 const cors = require("cors");
 const { taskRouter } = require("./Router/taskrouter");
-const { files } = require("./Router/uploadRouter")
+const { files } = require("./Router/uploadRouter");
 
 // Set up CORS middleware with specific origin
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://courageous-crab-windbreaker.cyclic.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
@@ -20,6 +20,9 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/task", taskRouter);
 app.use("/upload", files);
+
+// Handle OPTIONS requests
+app.options("*", cors(corsOptions));
 
 app.listen(Port, async () => {
   try {
