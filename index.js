@@ -9,7 +9,7 @@ const { files } = require("./Router/uploadRouter");
 
 // Set up CORS middleware with specific origin
 const corsOptions = {
-  origin: "https://courageous-crab-windbreaker.cyclic.app",
+  origin: "*", // Allow requests from any origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
@@ -22,7 +22,7 @@ app.use("/task", taskRouter);
 app.use("/upload", files);
 
 // Handle OPTIONS requests
-app.options("*", cors(corsOptions));
+
 
 app.listen(Port, async () => {
   try {
