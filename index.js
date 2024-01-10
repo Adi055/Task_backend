@@ -22,6 +22,7 @@ app.use("/task", taskRouter);
 app.use("/upload", files);
 
 // Handle OPTIONS requests
+app.options("*", cors(corsOptions));
 
 
 app.listen(Port, async () => {
