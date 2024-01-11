@@ -35,7 +35,7 @@ try {
 
 taskRouter.post("/add", Auth, upload.single('file'), async (req, res) => {
   try {
-    // Check if a file is uploaded
+    
     const dynamicURL = `http://${dynamicDomain}/${req.file.path}`;
     //const imageUrl = `${req.protocol}://${req.get("host")}/${req.file.path}`;
     let fileData = null;
