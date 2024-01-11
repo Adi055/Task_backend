@@ -102,16 +102,16 @@ taskRouter.post("/add", Auth, upload.single('file'), async (req, res) => {
     
     taskRouter.delete("/delete/:id",async(req,res)=>{
       const {id}=req.params;
-      const task = await taskModel.findOne({_id:id})
+      //const task = await taskModel.findOne({_id:id})
       try {
-        if(req.body.userID!==task.userID){
-          res.send({"msg":"you are not authorized"})
-        }
-        else{
-          await taskModel.findByIdAndDelete({_id:id});
-          res.send({"msg":"user has been deleted"})
-        }
-  
+        // if(req.body.userID!==task.userID){
+        //   res.send({"msg":"you are not authorized"})
+        // }
+        // else{
+        
+        // }
+        await taskModel.findByIdAndDelete({_id:id});
+        res.send({"msg":"user has been deleted"})
       } catch (error) {
         res.send({"error":error})
       }
