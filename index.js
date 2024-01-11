@@ -5,7 +5,8 @@ const Port = 8080;
 const app = express();
 const cors = require("cors");
 const { taskRouter } = require("./Router/taskrouter");
-const { files } = require("./Router/uploadRouter");
+
+const path=require("path")
 
 // Set up CORS middleware with specific origin
 const corsOptions = {
@@ -19,7 +20,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/users", userRouter);
 app.use("/task", taskRouter);
-app.use("/upload", files);
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Handle OPTIONS requests
 app.options("*", cors(corsOptions));
